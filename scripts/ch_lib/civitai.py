@@ -23,6 +23,7 @@ model_type_dict = {
     "TextualInversion": "ti",
     "Hypernetwork": "hyper",
     "LORA": "lora",
+    "LoCon": "lora",
 }
 
 
@@ -43,7 +44,7 @@ def get_model_info_by_hash(hash:str):
         util.printD("hash is empty")
         return
 
-    r = requests.get(url_dict["hash"]+hash, headers=util.def_headers)
+    r = requests.get(url_dict["hash"]+hash, headers=util.def_headers, proxies=util.proxies)
     if not r.ok:
         if r.status_code == 404:
             # this is not a civitai model
@@ -80,7 +81,7 @@ def get_model_info_by_id(id:str) -> dict:
         util.printD("id is empty")
         return
 
-    r = requests.get(url_dict["modelId"]+str(id), headers=util.def_headers)
+    r = requests.get(url_dict["modelId"]+str(id), headers=util.def_headers, proxies=util.proxies)
     if not r.ok:
         if r.status_code == 404:
             # this is not a civitai model
@@ -116,7 +117,7 @@ def get_version_info_by_version_id(id:str) -> dict:
         util.printD("id is empty")
         return
 
-    r = requests.get(url_dict["modelVersionId"]+str(id), headers=util.def_headers)
+    r = requests.get(url_dict["modelVersionId"]+str(id), headers=util.def_headers, proxies=util.proxies)
     if not r.ok:
         if r.status_code == 404:
             # this is not a civitai model
@@ -294,7 +295,7 @@ def get_model_id_from_url(url:str) -> str:
         id = str(url)
         return id
     
-    s = url.split("/")
+    s = re.sub("\\?.+$", "", url).split("/")
     if len(s) < 2:
         util.printD("url is not valid")
         return ""

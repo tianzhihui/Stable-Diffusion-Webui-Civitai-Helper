@@ -1,12 +1,20 @@
 ### Language
-[中文](README.cn.md)  
-[日本語(非公式)](https://economylife.net/civitai-helper-webui-install/)  
+[中文](README.cn.md)   
+[日本語](README.jp.md)  
+[한국어(ChatGPT)](README.kr.md)  
+
+## About Civitai Helper2: Model Info Helper
+Civitai Helper 2 will be renamed to **ModelInfo Helper**. It is under development, you can watch its UI demo video to see how it gonna look like:    
+[YouTube](https://youtu.be/mPcKwQDDH8s)  
 
 # Notice
-After install or update to new version, you need to shutdown SD webui and re-launch. Just Reload UI won't work!
+**This extension now is very stable and works well for many people. If you have an issue, check console log window's detail and read [common issue](#common-issue) part**   
 
-# Stable-Diffusion-Webui-Civitai-Helper
-Stable Diffusion Webui Extension for Civitai, to handle your models much more easily.
+If you want to claim it doesn't work, check this first: [Claim Wall](claim_wall.md)  
+
+
+# Civitai Helper
+Stable Diffusion Webui Extension for Civitai, to handle your models much more easily.  
 
 Civitai: [Civitai Url](https://civitai.com/models/16768/civitai-helper-sd-webui-civitai-extension)  
 
@@ -18,10 +26,10 @@ Civitai: [Civitai Url](https://civitai.com/models/16768/civitai-helper-sd-webui-
 * Checking all your local model's new version from Civitai
 * Download a new version directly into SD model folder (with info+preview)
 * Modified Built-in "Extra Network" cards, to add the following buttons on each card:
-  - 🖼: Modified "replace preview" text into this icon
+  - 🖼️: Modified "replace preview" text into this icon
   - 🌐: Open this model's Civitai url in a new tab
   - 💡: Add this model's trigger words to prompt
-  - 🏷: Use this model's preview image's prompt
+  - 🏷️: Use this model's preview image's prompt
 * Above buttons support thumbnail mode of Extra Network
 * Option to always show additional buttons, to work with touchscreen.  
 
@@ -32,15 +40,15 @@ Copy this project's url into it, click install.
 
 Alternatively, download this project as a zip file, and unzip it to `Your SD webui folder/extensions`.
 
-Then shutdown SD Webui and Relaunch it. Just "Reload UI" won't work for this extension.
+Everytime you install or update this extension, you need to shutdown SD Webui and Relaunch it. Just "Reload UI" won't work for this extension.
 
 Done.
 
 # How to Use
-## Update Your SD Webui
-This extension need to get extra network's cards id. **Which is added to SD webui since 2023-02-06.** 
 
-So, if you are using a version earlier than this, you need to update your SD Webui! 
+## Update Your SD Webui
+This extension need to get extra network's cards id. Which is added since **2023-02-06**.  
+**If your SD webui is an earlier version, you need to update it!**  
 
 ## Scanning Models
 Go to extension tab "Civitai Helper". There is a button called "Scan model".  
@@ -125,12 +133,28 @@ After clicking button, extension will download that civitai model's info and pre
 
 ![](img/get_one_model_info.jpg)  
 
+## Proxy
+**If you are updating to new version, you need to re-lanuch SD webui before using it.**   
+
+Proxy textbox is at the bottom of extension tab. 
+
+**Each time you fill or clear a proxy value, you need to save setting, and Re-load UI with setting tab's reload button.**  
+
+Then all requests to civitai will use the proxy.  
+
+For some sock5 proxy, need to be used as "socks5h://xxxxx".  
+
+
+
+
 ## Other Setting
 **The Save Setting button, will save both "Scan Model"'s setting and other setting.**  
 
 * "Always Display Button" is good for touch screen.  
 * "Show Buttons on Thumb Mode" will turn on/off additional Buttons on thumbnail.  
 ![](img/other_setting.jpg)
+
+
 
 
 ## Preview Image
@@ -155,13 +179,6 @@ There are 2 cases this hash code can not find the model on civitai:
 In these cases, you can always link a model to civitai by filling its URL in this extension.
 
 
-## Civitai API Security Check
-Since last website down of civitai, it has more strict checking for request's frequency. Once it thinks this extension's request is not secured, it gonna re-direct extension's API request to Cloudflare's real human checking page. Then this extension can not get any information back. 
-
-In that case, you have to wait until civitai unblock you. It could take hours.  
-
-Since v1.5.1, TI scanning is forced to delay 1 second to avoid this case. And since 1.5.4, there is a default header in all API request to fake as a browser. So you should be find if you are using 1.5.4 or later.  
-
 
 ## Feature Request
 No new feature for v1.x after v1.5. All new feature will go to 2.x.
@@ -172,29 +189,48 @@ From v1.5, v1.x goes into maintenance phase.
 
 Enjoy!
 
+
 ## Common Issue
-### 4 Button on card didn't show
+### 4 Buttons on card didn't show
 #### Localization
-There was a Localization issue if you are not using Englist version of SD webui. This is fixed in the latest version of this extension.
+There was a Localization issue if you are not using English version of SD webui. This is fixed in the latest version of this extension. **Bilingual localization extension is supported by PR since v1.6.1.1.**  
 
-Update to v.1.5.7 to fix it.
-
+##### Using cloud based localization extension
+Turn off cloud based localization extension, use normal localization extension.  
 
 #### Other case
 First of all, make sure you clicked "Refresh Civitai Helper" button.  
 
-If issue is still there, then, only reason is you are not using the latest SD webui. So, Make sure you updated it.  
+If issue is still there, then only reason is you are not using the latest SD webui. So, Make sure you updated it.  
 
 Your update could be failed if you have modified SD webui's file. You need to check git command's console log to make sure it is updated. 
 
 In many cases, git will just refuse to update and tell you there are some conflicts need you to handle manually. If you don't check the consloe log, you will think your SD webui is updated, but it is not.  
 
-### Scan or Get model info failed
-This extension now is stable. So, the reason for this most likely is your request has been refused by Civitai.  
+### Request, Scan or Get model info failed
+This extension is stable. So, the reason for this most likely is your internet connection to Civitai API service.  
 
-Civitai is not that stable as those rich websites, it can be down, or re-direct API request to a real human checking page.(This rule is disabled for now, but can be enabled at anytime they want)  
+Civitai is not as stable as those rich websites, it can be down or refuse your API connection.  
 
-So, the only thing you can do is just wait a while then try again.  
+Civitai has a connection pool setting. Basicly, it's a max connection number that civitai can have at the same time. So, if there are already too manny connections on civitai, it will refuse your API connection.  
+
+In those cases, the only thing you can do is just wait a while then try again.  
+
+### Get Wrong model info and preview images from civitai
+A bad news is, some models are saved with a wrong sha256 in civitai's database. Check here for more detail:  
+[https://github.com/civitai/civitai/issues/426](https://github.com/civitai/civitai/issues/426)  
+
+So, for those models, this extension can not get the right model info or preview images.   
+
+In this case, you have to remove the model info file and get the right model info by a civitai url on this extension's tab page.  
+
+Also, you can report those models with wrong sha256 to civitai at following page:   
+[https://discord.com/channels/1037799583784370196/1096271712959615100/1096271712959615100](https://discord.com/channels/1037799583784370196/1096271712959615100/1096271712959615100)  
+
+Please report that model to civitai, so they can fix it.  
+
+
+
 
 ### Scanning fail when using colab
 First of, search your error message with google. Most likely, it will be a colab issue.    
@@ -210,6 +246,27 @@ Since v1.5.5, we've already optimized the SHA256 function to the top. So the onl
 
 
 # Change Log
+## v1.6.3
+* Support downloading multiple files, not avaiable when checking new version.
+
+## v1.6.2.1
+* when parsing civitai url, remove query string by PR
+
+## v1.6.2
+* When downloading, re-name file if file already exists
+
+## v1.6.1.1
+* Support bilingual localization extension by PR
+
+## v1.6.1
+* Fix Localization issue for 4 addtional buttons on cards. (Forgot that again...)
+
+## v1.6.0
+* Fix some UI issues to work with gradio 3.23.0
+* Support Proxy when connecting to civitai. Check document for detail.
+* check realpath when opening file, to fix error when using junction
+* Fix multiple addtional buttons issue after switching tabs. 
+
 ## v1.5.7
 * Fix Localization issue for 4 addtional buttons on cards
 
